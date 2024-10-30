@@ -50,7 +50,7 @@ where
             Level::TRACE => message.dim(),
         };
 
-        writeln!(writer, "{}", colored_message)
+        writeln!(writer, "{colored_message}")
     }
 }
 
@@ -68,7 +68,7 @@ impl Visit for MessageVisitor {
 
     fn record_debug(&mut self, field: &tracing::field::Field, value: &dyn fmt::Debug) {
         if field.name() == "message" {
-            self.message = Some(format!("{:?}", value));
+            self.message = Some(format!("{value:?}"));
         }
     }
 }
