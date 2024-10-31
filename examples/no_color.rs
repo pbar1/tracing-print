@@ -44,7 +44,7 @@ fn main() {
         "{} {} {}",
         "extra".bold(),
         "ansi".underline(),
-        "formatting".underline()
+        "formatting".italic()
     );
-    tracing::error!("{}", "applies before level".underline())
+    tracing::error!("{}", "applies before level".strike())
 }

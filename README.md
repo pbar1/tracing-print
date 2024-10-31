@@ -1,7 +1,7 @@
 # tracing-print
 
-![Crates.io Version](https://img.shields.io/crates/v/tracing-print)
-![docs.rs](https://img.shields.io/docsrs/tracing-print)
+[![Crates.io Version](https://img.shields.io/crates/v/tracing-print)](https://crates.io/crates/tracing-print)
+[![docs.rs](https://img.shields.io/docsrs/tracing-print)](https://docs.rs/tracing-print)
 
 A simple `println`-like format for `tracing-subscriber`.
 
@@ -13,6 +13,13 @@ according to log level:
 - `INFO`: no formatting
 - `DEBUG`: blue
 - `TRACE`: dim
+
+### Usage
+
+```rust
+let layer = tracing_subscriber::fmt::layer()
+    .event_format(Print::default());
+```
 
 ### Example
 
@@ -43,11 +50,25 @@ tracing::info!(
     "{} {} {}",
     "extra".bold(),
     "ansi".underline(),
-    "formatting".underline()
+    "formatting".italic()
 );
 tracing::error!("{}", "applies before level".underline())
 ```
 
 Looks like this:
 
-![tracing-print example output](https://raw.githubusercontent.com/pbar1/tracing-print/refs/heads/main/.github/assets/example.png)
+<pre>
+<font color="#9D0006">error</font>
+<font color="#81550E">warn</font>
+info
+<font color="#076678">debug</font>
+<font color="#938974">trace</font>
+
+only message will be seen
+newlines and formatting work
+see? display=1337, debug=Dummy {
+    _field: (),
+}
+<b>extra</b> <u>ansi</u> <i>formatting</i>
+<font color="#9D0006"><s>applies before level</s></font>
+</pre>
