@@ -1,5 +1,8 @@
 # tracing-print
 
+![Crates.io Version](https://img.shields.io/crates/v/tracing-print)
+![docs.rs](https://img.shields.io/docsrs/tracing-print)
+
 A simple `println`-like format for `tracing-subscriber`.
 
 Prints the message field of an event and no others. Formats the message
@@ -45,9 +48,9 @@ tracing::info!(
 tracing::error!("{}", "applies before level".underline())
 ```
 
-Output:
+Looks like this:
 
-![alt text](.github/assets/example.png)
+![tracing-print example output](https://raw.githubusercontent.com/pbar1/tracing-print/refs/heads/main/.github/assets/example.png)
 
 ### TODOs
 
