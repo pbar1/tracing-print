@@ -2,6 +2,7 @@
 
 [![Crates.io Version](https://img.shields.io/crates/v/tracing-print)](https://crates.io/crates/tracing-print)
 [![docs.rs](https://img.shields.io/docsrs/tracing-print)](https://docs.rs/tracing-print)
+[![CI](https://github.com/pbar1/tracing-print/actions/workflows/ci.yml/badge.svg)](https://github.com/pbar1/tracing-print/actions/workflows/ci.yml)
 
 A simple `println`-like format for `tracing-subscriber`.
 
