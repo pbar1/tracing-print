@@ -2,6 +2,7 @@
 #![warn(clippy::pedantic)]
 
 use std::fmt;
+use std::marker::PhantomData;
 
 use tracing::field::Visit;
 use tracing::Event;
@@ -22,7 +23,9 @@ use tracing_subscriber::registry::LookupSpan;
 /// - `DEBUG`: blue
 /// - `TRACE`: dim
 #[derive(Default)]
-pub struct Print {}
+pub struct Print {
+    inner: PhantomData<()>,
+}
 
 impl<S, N> FormatEvent<S, N> for Print
 where

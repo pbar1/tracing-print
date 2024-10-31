@@ -1,6 +1,6 @@
 [package]
 name = "tracing-print"
-version = "0.0.2"
+version = "0.0.3"
 edition = "2021"
 description = "Simple println format for tracing-subscriber"
 license = "MIT OR Apache-2.0"
