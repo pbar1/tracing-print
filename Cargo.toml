@@ -1,6 +1,6 @@
 [package]
 name = "tracing-print"
-version = "0.0.1"
+version = "0.0.2"
 edition = "2021"
 description = "Simple println format for tracing-subscriber"
 license = "MIT OR Apache-2.0"
@@ -9,8 +9,15 @@ homepage = "https://github.com/pbar1/tracing-print"
 repository = "https://github.com/pbar1/tracing-print"
 documentation = "https://docs.rs/tracing-print"
 
+[features]
+default = ["ansi"]
+ansi = ["dep:yansi"]
+
 [dependencies]
 anstream = { version = "0.6", default-features = false }
 tracing = { version = "0.1", default-features = false }
 tracing-subscriber = { version = "0.3", features = ["std", "fmt", "registry"], default-features = false }
-yansi = { version = "1", default-features = false }
+yansi = { version = "1", default-features = false, optional = true }
+
+[dev-dependencies]
+tracing-subscriber = { version = "0.3", features = ["std", "fmt", "registry", "ansi"], default-features = false }

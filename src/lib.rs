@@ -11,8 +11,6 @@ use tracing_subscriber::fmt::format::FormatFields;
 use tracing_subscriber::fmt::format::Writer;
 use tracing_subscriber::fmt::FmtContext;
 use tracing_subscriber::registry::LookupSpan;
-use yansi::Paint;
-use yansi::Painted;
 
 /// Simple println format for `tracing-subscriber`. Prints the message field of
 /// an event and no others.
@@ -23,8 +21,6 @@ use yansi::Painted;
 /// - `INFO`: no formatting
 /// - `DEBUG`: blue
 /// - `TRACE`: dim
-///
-/// TODO: Option to disable ANSI
 #[derive(Default)]
 pub struct Print {}
 
@@ -43,15 +39,26 @@ where
         event.record(&mut visitor);
         let message = visitor.message.ok_or(fmt::Error)?;
 
-        let colored_message = match *event.metadata().level() {
-            Level::ERROR => message.red(),
-            Level::WARN => message.yellow(),
-            Level::INFO => Painted::new(&message),
-            Level::DEBUG => message.blue(),
-            Level::TRACE => message.dim(),
-        };
+        #[cfg(feature = "ansi")]
+        if writer.has_ansi_escapes() {
+            let message = apply_color(*event.metadata().level(), &message);
+            return writeln!(writer, "{message}");
+        }
 
-        writeln!(writer, "{colored_message}")
+        writeln!(writer, "{message}")
+    }
+}
+
+#[cfg(feature = "ansi")]
+fn apply_color(level: Level, message: &str) -> yansi::Painted<&str> {
+    use yansi::Paint;
+
+    match level {
+        Level::ERROR => message.red(),
+        Level::WARN => message.yellow(),
+        Level::INFO => yansi::Painted::new(message),
+        Level::DEBUG => message.blue(),
+        Level::TRACE => message.dim(),
     }
 }
 

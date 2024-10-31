@@ -51,8 +51,3 @@ tracing::error!("{}", "applies before level".underline())
 Looks like this:
 
 ![tracing-print example output](https://raw.githubusercontent.com/pbar1/tracing-print/refs/heads/main/.github/assets/example.png)
-
-### TODOs
-
-- Does not support conditional ANSI handling currently.
-  - Use an `anstream`-wrapped writer to mitigate this
