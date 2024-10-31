@@ -19,7 +19,7 @@ according to log level:
 
 ```rust
 let layer = tracing_subscriber::fmt::layer()
-    .event_format(Print::default());
+    .event_format(tracing_print::Print::default());
 ```
 
 ### Example
